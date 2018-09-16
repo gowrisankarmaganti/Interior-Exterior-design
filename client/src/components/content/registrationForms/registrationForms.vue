@@ -1,4 +1,4 @@
-<template src="./rightSideMenu.template.html"></template>
+<template src="./registrationForms.template.html"></template>
 <style>
     .image_menu {
         margin-top: 30px;
@@ -36,7 +36,7 @@
 </style>
 <script>
     export default {
-        name: 'rightSideMenu',
+        name: 'registrationForms',
         props: [],
         data() {
             return {
