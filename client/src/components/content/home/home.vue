@@ -21,7 +21,6 @@
         font-family: 'Kaushan Script', cursive;
         color: #dac292;
         margin-top: 1px;
-        /* letter-spacing: .1em; */
         text-shadow: 
         -1px -1px 1px #111, 
         2px 2px 1px #a48252;
@@ -69,7 +68,7 @@
 
     .rightSideForm {
         background: #d3b988;
-        padding: 20px 44px;
+        padding: 0px 44px;
         border-radius: 3px;
         color: #8e6c3e;
         margin-top: 33px;

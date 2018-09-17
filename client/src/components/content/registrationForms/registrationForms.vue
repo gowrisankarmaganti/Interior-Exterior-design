@@ -33,8 +33,13 @@
         bottom: 7px;
         font-size: 18px;
     }
+    .form-group.float-right{
+        float: right;
+    }
 </style>
 <script>
+import axios from 'axios'
+
     export default {
         name: 'registrationForms',
         props: [],
@@ -45,12 +50,28 @@
                     { name: "Ceiling", url: require("../../../assets/images/ceiling.jpg"), value: "ceiling" },
                     { name: "Tiles", url: require("../../../assets/images/tiles.jpg"), value: "tiles" },
                     { name: "Man Power", url: require("../../../assets/images/manPower.jpg"), value: "manPower" }
-                ]
+                ],
+                user:{}
             }
         },
         methods: {
             getCategoryType(cat){
                 alert(cat)
+            },
+            submitForm(){
+                axios({
+                        method: 'post',
+                        url: 'http://localhost:1226/register',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        data: this.user
+                    })
+                    .then(function(response){
+                        alert(response.data)
+                        
+                    })
+                    
             }
         },
         computed: {
