@@ -68,7 +68,7 @@ import axios from 'axios'
                         data: this.user
                     })
                     .then(function(response){
-                        alert(response.data)
+                        alert(JSON.stringify(response.data))
                         
                     })
                     
