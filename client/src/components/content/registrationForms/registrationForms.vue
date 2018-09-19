@@ -18,7 +18,7 @@
         /* border: 2px solid #bdbbbb; */
     }
 
-    .image_menu img:hover  {
+    .image_menu img:hover {
         -webkit-transform: scale(0.9);
         -ms-transform: scale(0.9);
         transform: scale(0.9);
@@ -33,16 +33,62 @@
         bottom: 7px;
         font-size: 18px;
     }
-    .form-group.float-right{
+
+    .rightSideForm {
+        background: #d3b988;
+        padding: 0px 44px;
+        border-radius: 3px;
+        color: #8e6c3e;
+        margin-top: 33px;
+    }
+
+    .rightSideForm input {
+        background: rgba(255, 255, 255, 0.4);
+        border: none;
+    }
+
+    .rightSideForm span {
+        background: #e5d5b8;
+    }
+
+    .successDetails {
+        position: relative;
+        background: #93d081;
+        padding: 28px 44px;
+        border-radius: 3px;
+        color: #8e6c3e;
+        margin-top: 33px;
+        max-width: 90%;
+        height: 220px;
+        margin-left: 50px;
+        border-radius: 25px;
+    }
+
+    .form-group.float-right {
         float: right;
+    }
+
+    .row.successDetails img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        max-width: 14%;
+    }
+
+    .row.successDetails .logout {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        padding: 12px 0px;
+        cursor: pointer;
     }
 </style>
 <script>
-import axios from 'axios'
+    import axios from 'axios'
 
     export default {
         name: 'registrationForms',
-        props: [],
+        props: ["isLoggedIn"],
         data() {
             return {
                 rightMenu: [
@@ -51,33 +97,52 @@ import axios from 'axios'
                     { name: "Tiles", url: require("../../../assets/images/tiles.jpg"), value: "tiles" },
                     { name: "Man Power", url: require("../../../assets/images/manPower.jpg"), value: "manPower" }
                 ],
-                user:{}
+                user: {},
+                loggedIn: isLoggedIn
+                // client: {}
             }
         },
         methods: {
-            getCategoryType(cat){
+            getCategoryType(cat) {
                 alert(cat)
             },
-            submitForm(){
+            submitForm() {
+               let scope=this;
                 axios({
-                        method: 'post',
-                        url: 'http://localhost:1226/register',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        data: this.user
+                    method: 'post',
+                    url: 'http://localhost:1226/register',
+                    data: this.user
+                })
+                    .then(function (response) {
+                        console.log(response)
+                        if (response.data) {
+                            window.localStorage.setItem('client', JSON.stringify(response.data))
+                            scope.loggedIn = true
+                            scope.client()
+                        }
+                        else{
+                            scope.loggedIn = false
+                        }
+
                     })
-                    .then(function(response){
-                        alert(JSON.stringify(response.data))
-                        
-                    })
-                    
             }
         },
         computed: {
-
+            client() {
+                let data = window.localStorage.getItem('client')
+                console.log(data)
+                if (true) {
+                    this.loggedIn = true
+                    return window.localStorage.getItem('client')
+                }
+                else {
+                    return {}
+                    this.loggedIn = false
+                }
+            }
         },
         mounted() {
+            alert(this.isLoggedIn)
             // // var myVideo = document.getElementById;
             // this.$refs.bgVideo.play();
             // // this.$refs.video1.width = 1090

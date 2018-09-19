@@ -4,15 +4,17 @@ var bodyParser = require('body-parser');
 let app = express();
 let http = httpModule.createServer(app);
 var path = require('path');
+var cookieParser = require('cookie-parser');
 var mysql = require('mysql')
 var connection = mysql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
-    password: '',
+    password: 'Apple#123',
     database: 'interior'
   })
 app.use(bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' }));
 app.use(bodyParser.urlencoded(bodyParser.urlencoded({ extended: true, limit: 1024 * 1024 * 20, type: 'application/x-www-form-urlencoding' })));
+app.use(cookieParser());
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -26,12 +28,12 @@ app.get('/call',function(req,res){
     })
 })
 app.post('/register',function(req,res){
-    console.log(req.body)
+    // console.log(req.body)
     let clientObj = req.body;
-    console.log(clientObj.name, clientObj.email)
-    connection.query("call createClient(?, ?, ?, ?, ?, ?, ?, ?, ? )", [null, clientObj.name, clientObj.email, clientObj.mobile, clientObj.builder, clientObj.profileImage, clientObj.location, clientObj.state, clientObj.pincode], function (err, rows, fields) {
+    // console.log(clientObj.name, clientObj.email)
+    connection.query("call registerClient(?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", [null, clientObj.name, clientObj.password, clientObj.email, clientObj.mobile,  clientObj.profileImage, clientObj.location, clientObj.state, clientObj.pincode,1], function (err, rows, fields) {
         if(!err){
-            res.send(rows[0])
+            res.send({name:clientObj.name, email:clientObj.email,mobile:clientObj.mobile})
         }
         else {
             res.send(err)

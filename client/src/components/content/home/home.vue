@@ -66,20 +66,7 @@
         100% {left:0px; top:0px;}
     }
 
-    .rightSideForm {
-        background: #d3b988;
-        padding: 0px 44px;
-        border-radius: 3px;
-        color: #8e6c3e;
-        margin-top: 33px;
-    }
-    .rightSideForm input {
-        background: rgba(255,255,255,0.4);
-        border: none;
-        }
-    .rightSideForm span {
-        background: #e5d5b8;
-        }
+    
 </style>
 <script>
     export default {
@@ -98,7 +85,15 @@
 
         },
         computed: {
-
+            getLoggedInUser(){
+                let data = window.localStorage.getItem('client')
+                if (data) {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
         },
         mounted() {
             // // var myVideo = document.getElementById;

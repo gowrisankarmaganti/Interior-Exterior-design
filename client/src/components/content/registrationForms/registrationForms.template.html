@@ -1,6 +1,6 @@
 <div>
-    <div class="row">
-            <h2 class="text-center">Registration</h2>   
+    <div class="row rightSideForm" v-if="!loggedIn">
+            <h2 class="text-center">Registration {{loggedIn}}</h2>   
     <!--Form with header-->
         <div class="form-group">
             <label for="name" class="cols-sm-2 control-label">Full Name</label>
@@ -47,6 +47,15 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Password</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" v-model="user.password" name="name" id="name"  placeholder="Enter your Password"/>
+                </div>
+            </div>
+        </div>
         <div class="form-group float-right">
             <div class="col-sm-10">
                 <div class="input-group">
@@ -54,6 +63,24 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <div v-if="loggedIn" class="row successDetails">
+        <h3>Successfully Registered </h3>
+        <img src="../../../assets/gif/home.gif" alt="">
+        <label for="">Name : {{client.name}}</label><br/>
+        <label for="">Email : {{client.email}}</label><br/>
+        <label for="">Contact Number : {{client.mobile}}</label>
+        <!-- <label for="">Name : ABC</label>
+        <br/>
+        <label for="">Email : abc@gmail.com</label>
+        <br/>
+        <label for="">Contact Number : 800821525</label> -->
+        <br/>
+
+        <div class="logout">
+            <i style="font-size:24px" class="fa fa-power-off"></i>
+        </div>
+        
     </div>
 </div>

@@ -17,8 +17,8 @@
                     <button class="btn btn-default btn-lg register" @click="getRegForm()"> Looking For Service</button>
                     <button class="btn btn-default btn-lg register" @click="getRegForm()"> Looking For Work</button>
             </div>
-            <div class="rightSideForm" v-if="formLanding">
-                    <registration-forms></registration-forms>
+            <div class="" v-if="formLanding && !getLoggedInUser">
+                    <registration-forms :isLoggedIn="getLoggedInUser"></registration-forms>
             </div>
             
         </div>
